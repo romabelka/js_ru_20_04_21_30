@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentBlock from './CommentBlock'
 
 export default class Article extends Component {
 /*
@@ -21,12 +22,17 @@ export default class Article extends Component {
                     {article.title}
                 </h2>
                 {this.getBody()}
+				
             </section>
         )
     }
 
     getBody() {
-        return this.state.isOpen && <div>{this.props.article.text}</div>
+        return this.state.isOpen && 
+				(<div>
+					<p>{this.props.article.text}</p>
+					<CommentBlock comments={this.props.article.comments} />
+				</div>)
     }
 
     toggleOpen = (ev) => {
