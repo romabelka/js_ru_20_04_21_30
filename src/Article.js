@@ -23,7 +23,7 @@ export default class Article extends Component {
                     {article.title}
                 </h2>
                 {this.getBody()}
-                <h5 onClick={this.toggleOpenComment}>{this.state.commentOpen ? "Close Coments" : "Open Coments"}</h5>
+                <div className="toggleComents" onClick={this.toggleOpenComment}>{this.state.commentOpen ? "Close Coments" : "Open Coments"}</div>
                 {this.state.commentOpen ? <CommentList comments={article.comments}/>: null}
             </section>
         )
