@@ -1,0 +1,11 @@
+section{
+    font-size: 14px;
+}
+.commentAuthor,
+.commentText{
+    margin-bottom: 5px;
+}
+.commentText{
+    margin-left: 35px;
+    font-style: italic;
+}
