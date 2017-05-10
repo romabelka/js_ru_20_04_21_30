@@ -5,7 +5,7 @@ import toggleOpen from '../decorators/toggleOpen'
 
 CommentList.propTypes = {
   isOpen: PropTypes.bool,
-  toggleOpen: PropTypes.func,
+  toggleOpen: PropTypes.func.isRequired,
   comments: PropTypes.array
 }
 
