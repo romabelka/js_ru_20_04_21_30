@@ -7,6 +7,10 @@ export default class ArticleList extends Component {
         openArticleId: null
     }
 
+    static propTypes = {
+      articles: PropTypes.array.isRequired
+    }
+
     render() {
         const {articles} = this.props
         const elements = articles.map(article => <li key={article.id}>
@@ -25,8 +29,4 @@ export default class ArticleList extends Component {
     toggleArticle = openArticleId => ev => {
         this.setState({openArticleId})
     }
-}
-
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
 }

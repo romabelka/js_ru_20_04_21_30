@@ -1,9 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
+CommentList.propTypes = {
+  isOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func,
+  comments: PropTypes.array
+}
+
 function CommentList(props) {
-    const {isOpen, toggleOpen} = props
+    const {isOpen = false, toggleOpen} = props
     const linkText = isOpen ? 'hide comments' : 'show comments'
 
     return (
