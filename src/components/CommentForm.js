@@ -37,7 +37,7 @@ export default class CommentForm extends Component {
         let state = {user};
 
         // ограничение на максимальную длину можно делать здесь же
-        // но я предпочел натинвый атрибут maxLength
+        // но я предпочел нативный атрибут maxLength
         if(user.length < this.props.userMinLength) {
             state.errors = {
                 user: this.props.userErrorText.replace('%minLength%', this.props.userMinLength)
