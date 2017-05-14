@@ -15,7 +15,7 @@ export default class CommentForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        this.defaultState = this.state = {
             user: '',
             text: '',
             errors: null
@@ -28,11 +28,7 @@ export default class CommentForm extends Component {
         if(!this.state.errors) {
             this.props.onSubmit(this.state);
             e.target.reset();
-            this.setState({
-                user: '',
-                text: '',
-                errors: null
-            });
+            this.setState(this.defaultState);
         }
     }
 
@@ -40,7 +36,7 @@ export default class CommentForm extends Component {
         const user = e.target.value.trim();
         let state = {user};
 
-        // ограничение на максимальную длинну можно делать здесь же
+        // ограничение на максимальную длину можно делать здесь же
         // но я предпочел натинвый атрибут maxLength
         if(user.length < this.props.userMinLength) {
             state.errors = {
