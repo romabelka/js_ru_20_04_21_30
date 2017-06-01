@@ -6,6 +6,7 @@ import Filters from './Filters/index'
 import Counter from './Counter'
 import CommentsPage from '../route_handlers/CommentsPage'
 import NotFoundPage from '../route_handlers/NotFoundPage'
+import LangProvider from './LangProvider'
 import {Redirect, Route, NavLink, Switch} from 'react-router-dom'
 import {ConnectedRouter as Router} from 'react-router-redux'
 import history from '../history'
@@ -17,7 +18,8 @@ class App extends Component {
     };
 
     state = {
-        username: ''
+        username: '',
+        language: 'en'
     }
 
     static childContextTypes = {
@@ -32,26 +34,34 @@ class App extends Component {
 
     handleUserChange = username => this.setState({ username })
 
+    changeLanguage = language => ev => this.setState({ language })
+
     render() {
         return (
             <Router history = {history}>
-                <div>
-                    <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
-                    <Menu>
-                        <MenuItem path = '/counter'/>
-                        <MenuItem path = '/filters'/>
-                        <MenuItem path = '/articles'/>
-                    </Menu>
+                <LangProvider language = {this.state.language}>
+                    <div>
+                        <ul>
+                            <li onClick = {this.changeLanguage('en')}>English</li>
+                            <li onClick = {this.changeLanguage('ru')}>Russian</li>
+                        </ul>
+                        <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
+                        <Menu>
+                            <MenuItem path = '/counter'/>
+                            <MenuItem path = '/filters'/>
+                            <MenuItem path = '/articles'/>
+                        </Menu>
 
-                    <Switch>
-                        <Route path = '/counter' component = {Counter} exact />
-                        <Route path = '/filters' component = {Filters}/>
-                        <Route path = '/articles/new' render = {this.getNewArticleComponent}/>
-                        <Route path = '/articles' component = {ArticlesPage}/>
-                        <Route path = '/comments' component = {CommentsPage} />
-                        <Route path = '*' component = {NotFoundPage} />
-                    </Switch>
-                </div>
+                        <Switch>
+                            <Route path = '/counter' component = {Counter} exact />
+                            <Route path = '/filters' component = {Filters}/>
+                            <Route path = '/articles/new' render = {this.getNewArticleComponent}/>
+                            <Route path = '/articles' component = {ArticlesPage}/>
+                            <Route path = '/comments' component = {CommentsPage} />
+                            <Route path = '*' component = {NotFoundPage} />
+                        </Switch>
+                    </div>
+                </LangProvider>
             </Router>
         )
     }
