@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES,
     LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL } from '../constants'
-import {replace, push} from 'react-router-redux'
+import {push, replace} from 'react-router-redux'
 
 export function increment() {
     const action = {
@@ -75,7 +75,7 @@ export function loadArticle(id) {
 
                     dispatch(replace('/error'))
                 })
-        }, 1000)
+        }, 500)
     }
 }
 

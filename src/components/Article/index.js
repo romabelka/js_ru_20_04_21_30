@@ -11,7 +11,7 @@ class Article extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            title: PropTypes.string,
             text: PropTypes.string,
             comments: PropTypes.array
         }),
@@ -22,16 +22,6 @@ class Article extends Component {
 
     static contextTypes = {
         user: PropTypes.string
-    }
-
-/*
-    componentWillMount() {
-        console.log('---', 'mounting')
-    }
-*/
-
-    componentWillUpdate() {
-        console.log('---', 'updating')
     }
 
     componentDidMount() {
@@ -54,7 +44,9 @@ class Article extends Component {
                 <h2 onClick={toggleOpen}>
                     {article.title}
                 </h2>
-                <h3>User: {this.context.user}</h3>
+                <h3>
+                    User: {this.context.user}
+                </h3>
                 <a href = "#" onClick = {this.handleDelete}>delete me</a>
                 <CSSTransitionGroup
                     transitionName = "article"
@@ -74,21 +66,18 @@ class Article extends Component {
     }
 
     getBody() {
-        const {article, isOpen} = this.props
+        const {isOpen, article} = this.props
         if (!isOpen) return null
         if (article.loading) return <Loader />
-
         return (
             <div>
                 {this.props.article.text}
-                <CommnetList article = {this.props.article} ref = 'commentList'/>
+                <CommnetList article = {this.props.article}/>
             </div>
         )
     }
 }
 
-export default connect((state, { id }) => ({
+export default connect((state, {id}) => ({
     article: state.articles.getIn(['entities', id])
-}), { deleteArticle, loadArticle }, null, {
-    pure: false
-})(Article)
+}), { deleteArticle, loadArticle }, null, {pure: false})(Article)
